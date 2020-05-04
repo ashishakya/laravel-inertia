@@ -21,4 +21,6 @@ Route::get('dashboard', [DashboardController::class, '__invoke']);
 
 Auth::routes(['register'=>false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware'=>'auth'], function (){
+    Route::get('dashboard', [DashboardController::class, '__invoke']);
+});
