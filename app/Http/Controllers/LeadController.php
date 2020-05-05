@@ -14,7 +14,7 @@ class LeadController extends Controller
     public function index()
     {
         $leads = Lead::query()
-                     ->where('branch_id', 2)
+                     ->where('branch_id', 1)
                      ->latest()
                      ->get();
 
@@ -29,10 +29,13 @@ class LeadController extends Controller
     public function show($leadId)
     {
 
+        $lead = Lead::findOrFail((int) $leadId);
+        $lead->load('reminders');
+
         return Inertia::render(
             'Leads/Show',
             [
-                'leadDetail' => Lead::findOrFail((int) $leadId),
+                'leadDetail' => $lead,
             ]
         );
     }
@@ -56,8 +59,8 @@ class LeadController extends Controller
 
     public function update(CreateUpdateLeadRequest $request, int $leadId)
     {
-        $data = $request->validated();
-        $data['age']       = Carbon::parse($data['dob'])->age;
+        $data        = $request->validated();
+        $data['age'] = Carbon::parse($data['dob'])->age;
 
         $lead = Lead::where('id', $leadId)->update($data);
 

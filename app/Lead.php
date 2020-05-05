@@ -14,6 +14,12 @@ class Lead extends Model
         'interested_package',
         'dob',
         'branch_id',
-        'added_by'
+        'added_by',
     ];
+
+    public function reminders()
+    {
+        return $this->hasMany(Reminder::class, 'lead_id', 'id')
+                    ->latest();
+    }
 }
