@@ -17,6 +17,7 @@
                             <th>DOB</th>
                             <th>Package</th>
                             <th>Added On</th>
+                            <th>Action</th>
                         </tr>
                         <tr v-for="lead in leads" :key="lead.id">
                             <td v-text="lead.id"></td>
@@ -26,6 +27,9 @@
                             <td v-text="lead.dob"></td>
                             <td v-text="lead.interested_package"></td>
                             <td v-text="lead.created_at"></td>
+                            <td>
+                                <inertia-link :href="`leads/${lead.id}`">View</inertia-link>
+                            </td>
                         </tr>
                     </table>
                 </div>

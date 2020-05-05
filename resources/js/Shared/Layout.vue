@@ -20,7 +20,8 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 <!--                                <a class="dropdown-item" href="#" @click="handleLogout">Leads</a>-->
-                                <inertia-link href="/leads" class="dropdown-item">Leads</inertia-link>
+                                <inertia-link href="/leads" class="dropdown-item">View Leads</inertia-link>
+                                <inertia-link href="/leads/create" class="dropdown-item">Add Lead</inertia-link>
                             </div>
                         </li>
 

@@ -17,8 +17,19 @@ class LeadController extends Controller
                      ->latest()
                      ->get();
 
-        return Inertia::render('Leads/Index', [
-            'leads'=>$leads
+        return Inertia::render(
+            'Leads/Index',
+            [
+                'leads' => $leads,
+            ]
+        );
+    }
+
+    public function show($leadId)
+    {
+
+        return Inertia::render('Leads/Show', [
+            'leadDetail' => Lead::findOrFail((int) $leadId)
         ]);
     }
 

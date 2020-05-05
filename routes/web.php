@@ -27,5 +27,6 @@ Route::group(
         Route::get('leads/create', [LeadController::class, 'create']);
         Route::post('leads', [LeadController::class, 'store']);
         Route::get('leads', [LeadController::class, 'index']);
+        Route::get('leads/{lead}', [LeadController::class, 'show'])->name('leads.show');
     }
 );
