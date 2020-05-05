@@ -71,6 +71,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button class="btn btn-success">Save</button>
+                        <inertia-link :href="$route('leads.index')" class="btn btn-warning">Back</inertia-link>
                     </div>
                 </div>
             </form>

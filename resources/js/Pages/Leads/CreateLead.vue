@@ -43,10 +43,8 @@
                     </div>
 
 
-
-
                     <div class="col-md-6">
-<!--                        email-->
+                        <!--                        email-->
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email"
@@ -57,7 +55,7 @@
                                    tabindex="2"
                             >
                         </div>
-<!--                        dob-->
+                        <!--                        dob-->
                         <div class="form-group">
                             <label for="phone">Dob</label>
                             <input type="date"
@@ -73,6 +71,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button class="btn btn-success">Save</button>
+                        <inertia-link :href="$route('leads.index')" class="btn btn-warning">Back</inertia-link>
                     </div>
                 </div>
             </form>
@@ -100,7 +99,7 @@
         },
         methods: {
             async handleSubmit() {
-              let response = await this.$inertia.post('/leads', this.lead);
+                let response = await this.$inertia.post('/leads', this.lead);
             }
         }
     }

@@ -2070,7 +2070,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2166,6 +2165,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2186,6 +2187,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
+//
 //
 //
 //
@@ -39487,9 +39489,25 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12" }, [
-              _c("button", { staticClass: "btn btn-success" }, [_vm._v("Save")])
-            ])
+            _c(
+              "div",
+              { staticClass: "col-md-12" },
+              [
+                _c("button", { staticClass: "btn btn-success" }, [
+                  _vm._v("Save")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "inertia-link",
+                  {
+                    staticClass: "btn btn-warning",
+                    attrs: { href: _vm.$route("leads.index") }
+                  },
+                  [_vm._v("Back")]
+                )
+              ],
+              1
+            )
           ])
         ]
       )
@@ -39573,7 +39591,9 @@ var render = function() {
                     [
                       _c(
                         "inertia-link",
-                        { attrs: { href: "leads/" + lead.id } },
+                        {
+                          attrs: { href: _vm.$route("leads.show", [lead.id]) }
+                        },
                         [_vm._v("View")]
                       )
                     ],
@@ -39794,9 +39814,25 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12" }, [
-              _c("button", { staticClass: "btn btn-success" }, [_vm._v("Save")])
-            ])
+            _c(
+              "div",
+              { staticClass: "col-md-12" },
+              [
+                _c("button", { staticClass: "btn btn-success" }, [
+                  _vm._v("Save")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "inertia-link",
+                  {
+                    staticClass: "btn btn-warning",
+                    attrs: { href: _vm.$route("leads.index") }
+                  },
+                  [_vm._v("Back")]
+                )
+              ],
+              1
+            )
           ])
         ]
       )
@@ -52558,6 +52594,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
+
+
+vue__WEBPACK_IMPORTED_MODULE_1___default.a.prototype.$route = function () {
+  return route.apply(void 0, arguments).url();
+};
 
 vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(_inertiajs_inertia_vue__WEBPACK_IMPORTED_MODULE_0__["InertiaApp"]);
 var app = document.getElementById('app');

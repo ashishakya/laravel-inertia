@@ -28,7 +28,9 @@
                             <td v-text="lead.interested_package"></td>
                             <td v-text="lead.created_at"></td>
                             <td>
-                                <inertia-link :href="`leads/${lead.id}`">View</inertia-link>
+<!--                                <inertia-link :href="$route('users.create')">Create User</inertia-link>-->
+
+                                <inertia-link :href="$route('leads.show', [lead.id])">View</inertia-link>
                             </td>
                         </tr>
                     </table>

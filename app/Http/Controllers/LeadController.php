@@ -42,8 +42,11 @@ class LeadController extends Controller
     {
         $data             = $request->validated();
         $data['added_by'] = Auth::user()->id;
+        $data['branch_id'] = 2;
         $data['age']      = 20;
 
-        return redirect()->route('dashboard');
+        Lead::create($data);
+
+        return redirect()->route('leads.index');
     }
 }

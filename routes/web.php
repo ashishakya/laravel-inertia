@@ -24,9 +24,9 @@ Route::group(
     ['middleware' => 'auth'],
     function () {
         Route::get('dashboard', [DashboardController::class, '__invoke'])->name('dashboard');
-        Route::get('leads/create', [LeadController::class, 'create']);
+        Route::get('leads/create', [LeadController::class, 'create'])->name('leads.create');
         Route::post('leads', [LeadController::class, 'store']);
-        Route::get('leads', [LeadController::class, 'index']);
+        Route::get('leads', [LeadController::class, 'index'])->name('leads.index');
         Route::get('leads/{lead}', [LeadController::class, 'show'])->name('leads.show');
     }
 );
