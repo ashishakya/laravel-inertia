@@ -26,5 +26,6 @@ Route::group(
         Route::get('dashboard', [DashboardController::class, '__invoke'])->name('dashboard');
         Route::get('leads/create', [LeadController::class, 'create']);
         Route::post('leads', [LeadController::class, 'store']);
+        Route::get('leads', [LeadController::class, 'index']);
     }
 );
