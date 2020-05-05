@@ -14,5 +14,6 @@ class Lead extends Model
         'interested_package',
         'dob',
         'branch_id',
+        'added_by'
     ];
 }

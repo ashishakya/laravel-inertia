@@ -18,14 +18,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, '__invoke']);
 
-Route::get('dashboard', [DashboardController::class, '__invoke']);
-
 Auth::routes(['register' => false]);
 
 Route::group(
     ['middleware' => 'auth'],
     function () {
-        Route::get('dashboard', [DashboardController::class, '__invoke']);
+        Route::get('dashboard', [DashboardController::class, '__invoke'])->name('dashboard');
         Route::get('leads/create', [LeadController::class, 'create']);
+        Route::post('leads', [LeadController::class, 'store']);
     }
 );

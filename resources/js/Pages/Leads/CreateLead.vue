@@ -34,7 +34,7 @@
                                        class="form-control"
                                        placeholder="Enter package"
                                        id="package"
-                                       v-model="lead.package"
+                                       v-model="lead.interested_package"
                                        tabindex="4"
                                 >
                             </div>
@@ -91,7 +91,7 @@
                     email: '',
                     phone: '',
                     dob: '',
-                    package: ''
+                    interested_package: ''
                 }
             }
         },
@@ -99,8 +99,8 @@
             Layout
         },
         methods: {
-            handleSubmit() {
-
+            async handleSubmit() {
+              let response = await this.$inertia.post('/leads', this.lead);
             }
         }
     }
