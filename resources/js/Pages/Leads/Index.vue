@@ -1,9 +1,10 @@
 <template>
     <layout>
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>Leads</h1>
+            <div class="row" style="display: flex">
+                <h1>Leads</h1>
+                <div class="ml-auto">
+                    <inertia-link :href="$route('leads.create')" class="btn btn-primary">Add Lead</inertia-link>
                 </div>
             </div>
             <div class="row">
@@ -15,6 +16,7 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>DOB</th>
+                            <th>Age</th>
                             <th>Package</th>
                             <th>Added On</th>
                             <th>Action</th>
@@ -25,10 +27,11 @@
                             <td v-text="lead.email"></td>
                             <td v-text="lead.phone"></td>
                             <td v-text="lead.dob"></td>
+                            <td v-text="lead.age"></td>
                             <td v-text="lead.interested_package"></td>
                             <td v-text="lead.created_at"></td>
                             <td>
-<!--                                <inertia-link :href="$route('users.create')">Create User</inertia-link>-->
+                                <!--                                <inertia-link :href="$route('users.create')">Create User</inertia-link>-->
 
                                 <inertia-link :href="$route('leads.show', [lead.id])">View</inertia-link>
                             </td>
@@ -47,7 +50,7 @@
         components: {
             Layout
         },
-        props:['leads']
+        props: ['leads']
     }
 </script>
 

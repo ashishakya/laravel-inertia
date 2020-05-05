@@ -2167,6 +2167,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -39570,8 +39573,24 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("layout", [
     _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-12" }, [_c("h1", [_vm._v("Leads")])])
+      _c("div", { staticClass: "row", staticStyle: { display: "flex" } }, [
+        _c("h1", [_vm._v("Leads")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "ml-auto" },
+          [
+            _c(
+              "inertia-link",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { href: _vm.$route("leads.create") }
+              },
+              [_vm._v("Add Lead")]
+            )
+          ],
+          1
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
@@ -39591,6 +39610,8 @@ var render = function() {
                 _vm._v(" "),
                 _c("th", [_vm._v("DOB")]),
                 _vm._v(" "),
+                _c("th", [_vm._v("Age")]),
+                _vm._v(" "),
                 _c("th", [_vm._v("Package")]),
                 _vm._v(" "),
                 _c("th", [_vm._v("Added On")]),
@@ -39609,6 +39630,8 @@ var render = function() {
                   _c("td", { domProps: { textContent: _vm._s(lead.phone) } }),
                   _vm._v(" "),
                   _c("td", { domProps: { textContent: _vm._s(lead.dob) } }),
+                  _vm._v(" "),
+                  _c("td", { domProps: { textContent: _vm._s(lead.age) } }),
                   _vm._v(" "),
                   _c("td", {
                     domProps: { textContent: _vm._s(lead.interested_package) }

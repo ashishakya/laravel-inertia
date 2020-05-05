@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUpdateLeadRequest;
 use App\Lead;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -28,9 +29,12 @@ class LeadController extends Controller
     public function show($leadId)
     {
 
-        return Inertia::render('Leads/Show', [
-            'leadDetail' => Lead::findOrFail((int) $leadId)
-        ]);
+        return Inertia::render(
+            'Leads/Show',
+            [
+                'leadDetail' => Lead::findOrFail((int) $leadId),
+            ]
+        );
     }
 
     public function create()
@@ -40,10 +44,10 @@ class LeadController extends Controller
 
     public function store(CreateUpdateLeadRequest $request)
     {
-        $data             = $request->validated();
-        $data['added_by'] = Auth::user()->id;
+        $data              = $request->validated();
+        $data['added_by']  = Auth::user()->id;
         $data['branch_id'] = 2;
-        $data['age']      = 20;
+        $data['age']       = Carbon::parse($data['dob'])->age;
 
         Lead::create($data);
 
@@ -53,6 +57,8 @@ class LeadController extends Controller
     public function update(CreateUpdateLeadRequest $request, int $leadId)
     {
         $data = $request->validated();
+        $data['age']       = Carbon::parse($data['dob'])->age;
+
         $lead = Lead::where('id', $leadId)->update($data);
 
         return redirect()->route('leads.show', $leadId);
