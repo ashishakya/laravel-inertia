@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateLeadRequest;
+use App\Http\Requests\CreateUpdateLeadRequest;
 use App\Lead;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +38,7 @@ class LeadController extends Controller
         return Inertia::render('Leads/CreateLead');
     }
 
-    public function store(CreateLeadRequest $request)
+    public function store(CreateUpdateLeadRequest $request)
     {
         $data             = $request->validated();
         $data['added_by'] = Auth::user()->id;
@@ -48,5 +48,13 @@ class LeadController extends Controller
         Lead::create($data);
 
         return redirect()->route('leads.index');
+    }
+
+    public function update(CreateUpdateLeadRequest $request, int $leadId)
+    {
+        $data = $request->validated();
+        $lead = Lead::where('id', $leadId)->update($data);
+
+        return redirect()->route('leads.show', $leadId);
     }
 }

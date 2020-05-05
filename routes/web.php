@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\WelcomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,9 +25,6 @@ Route::group(
     ['middleware' => 'auth'],
     function () {
         Route::get('dashboard', [DashboardController::class, '__invoke'])->name('dashboard');
-        Route::get('leads/create', [LeadController::class, 'create'])->name('leads.create');
-        Route::post('leads', [LeadController::class, 'store']);
-        Route::get('leads', [LeadController::class, 'index'])->name('leads.index');
-        Route::get('leads/{lead}', [LeadController::class, 'show'])->name('leads.show');
+        Route::resource('leads', 'LeadController');
     }
 );

@@ -90,7 +90,7 @@
                     email: '',
                     phone: '',
                     dob: '',
-                    interested_package: ''
+                    interested_package: '',
                 }
             }
         },
@@ -106,8 +106,10 @@
             }
         },
         methods: {
-            handleSubmit() {
-
+            async handleSubmit() {
+                this.lead['_method']='patch';
+                let targetRoute = this.$route('leads.update', this.leadDetail.id);
+                let response = await this.$inertia.post(targetRoute, this.lead)
             }
         }
     }
