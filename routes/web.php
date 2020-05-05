@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LeadController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +20,12 @@ Route::get('/', [WelcomeController::class, '__invoke']);
 
 Route::get('dashboard', [DashboardController::class, '__invoke']);
 
-Auth::routes(['register'=>false]);
+Auth::routes(['register' => false]);
 
-Route::group(['middleware'=>'auth'], function (){
-    Route::get('dashboard', [DashboardController::class, '__invoke']);
-});
+Route::group(
+    ['middleware' => 'auth'],
+    function () {
+        Route::get('dashboard', [DashboardController::class, '__invoke']);
+        Route::get('leads/create', [LeadController::class, 'create']);
+    }
+);
