@@ -14,4 +14,9 @@ class Reminder extends Model
         'note',
         'status',
     ];
+
+    public function getStatusAttribute(string $status)
+    {
+        return ucwords($status);
+    }
 }
