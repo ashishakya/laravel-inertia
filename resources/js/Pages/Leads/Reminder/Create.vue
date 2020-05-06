@@ -6,7 +6,7 @@
                     <h1>
                         <inertia-link :href="$route('leads.index')">Leads</inertia-link>
                         <span class="breadcrumb-sep">/</span>
-                        <inertia-link :href="$route('leads.show', [lead.id])" v-text="lead.name"></inertia-link>
+                        <inertia-link :href="$route('leads.show', [lead.id])">Lead Details</inertia-link>
                         <span class="breadcrumb-sep">/</span>
                         Add Reminder
                     </h1>
@@ -47,6 +47,7 @@
                 formData:{
                     reminder: '',
                     reminder_date: '',
+                    lead_id: this.lead.id,
                 }
             }
         },
@@ -59,8 +60,12 @@
             }
         },
         methods:{
-            handleSubmit(){
-
+            async handleSubmit(){
+                let targetRoute = this.$route('leads.reminders.store', [this.lead.id]);
+                await this.$inertia.post(targetRoute, this.formData)
+                    .then(()=>{
+                        console.log('done')
+                })
             }
         }
     }

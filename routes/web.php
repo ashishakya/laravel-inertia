@@ -28,5 +28,6 @@ Route::group(
         Route::get('dashboard', [DashboardController::class, '__invoke'])->name('dashboard');
         Route::resource('leads', 'LeadController');
         Route::get('leads/{lead}/reminders/create', [ReminderController::class, 'create'])->name('leads.reminders.create');
+        Route::post('leads/{lead}/reminders', [ReminderController::class, 'store'])->name('leads.reminders.store');
     }
 );

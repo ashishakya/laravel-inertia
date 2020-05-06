@@ -2189,7 +2189,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2236,12 +2244,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       formData: {
         reminder: '',
-        reminder_date: ''
+        reminder_date: '',
+        lead_id: this.lead.id
       }
     };
   },
   components: {
-    Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
     lead: {
@@ -2249,7 +2258,29 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    handleSubmit: function handleSubmit() {}
+    handleSubmit: function handleSubmit() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var targetRoute;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                targetRoute = _this.$route('leads.reminders.store', [_this.lead.id]);
+                _context.next = 3;
+                return _this.$inertia.post(targetRoute, _this.formData).then(function () {
+                  console.log('done');
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
   }
 });
 
@@ -2273,6 +2304,15 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -39816,10 +39856,11 @@ var render = function() {
               _vm._v(" "),
               _c("span", { staticClass: "breadcrumb-sep" }, [_vm._v("/")]),
               _vm._v(" "),
-              _c("inertia-link", {
-                attrs: { href: _vm.$route("leads.show", [_vm.lead.id]) },
-                domProps: { textContent: _vm._s(_vm.lead.name) }
-              }),
+              _c(
+                "inertia-link",
+                { attrs: { href: _vm.$route("leads.show", [_vm.lead.id]) } },
+                [_vm._v("Lead Details")]
+              ),
               _vm._v(" "),
               _c("span", { staticClass: "breadcrumb-sep" }, [_vm._v("/")]),
               _vm._v("\n                    Add Reminder\n                ")
@@ -39960,6 +40001,25 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("layout", [
     _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _c(
+            "h1",
+            [
+              _c(
+                "inertia-link",
+                { attrs: { href: _vm.$route("leads.index") } },
+                [_vm._v("Lead")]
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "breadcrumb-sep" }, [_vm._v("/")]),
+              _vm._v("\n                    Lead Details\n                ")
+            ],
+            1
+          )
+        ])
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "card" }, [

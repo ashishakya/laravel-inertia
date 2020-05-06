@@ -3,6 +3,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    <h1>
+                        <inertia-link :href="$route('leads.index')">Lead</inertia-link>
+                        <span class="breadcrumb-sep">/</span>
+                        Lead Details
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">Lead Details</div>
                         <div class="card-body">
