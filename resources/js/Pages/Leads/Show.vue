@@ -104,11 +104,15 @@
                                     v-for="reminder in leadDetail.reminders"
                                     :key="reminder.id">
                                     <div class="row">
-                                        <div class="col-md-6">{{ reminder.reminder }}</div>
+                                        <div class="col-md-5">{{ reminder.reminder }}</div>
                                         <div class="col-md-2">{{ reminder.reminder_date }}</div>
                                         <div class="col-md-2"><strong>{{ reminder.status }}</strong></div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-3">
                                             <inertia-link :href="$route('leads.reminders.show', [leadDetail.id, reminder.id])">View</inertia-link>
+                                            <template v-if="reminder.status !== 'Completed'">
+                                                |
+                                                <inertia-link href="#" @click.prevent="markAsCompleted(reminder)">Mark as completed</inertia-link>
+                                            </template>
                                         </div>
                                     </div>
                                 </li>
@@ -155,10 +159,13 @@
             }
         },
         methods: {
-            async handleSubmit() {
-                // this.lead['_method'] = 'patch';
+            handleSubmit() {
                 let targetRoute = this.$route('leads.update', this.leadDetail.id);
-                let response = await this.$inertia.patch(targetRoute, this.lead)
+                this.$inertia.patch(targetRoute, this.lead)
+            },
+            markAsCompleted(reminder) {
+                let targetRoute = this.$route('leads.reminders.mark_as_completed', [this.leadDetail.id, reminder.id])
+                this.$inertia.post(targetRoute);
             }
         }
     }

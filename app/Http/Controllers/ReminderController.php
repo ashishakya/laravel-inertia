@@ -45,4 +45,11 @@ class ReminderController extends Controller
 
         return redirect()->route('leads.show', $lead->id);
     }
+
+    public function markAsCompleted(Request $request, Lead $lead, Reminder $reminder)
+    {
+        $reminder->markAsCompleted();
+
+        return redirect()->route('leads.show', $lead->id);
+    }
 }

@@ -19,4 +19,13 @@ class Reminder extends Model
     {
         return ucwords($status);
     }
+
+    public function markAsCompleted()
+    {
+        $this->update(
+            [
+                'status' => 'completed',
+            ]
+        );
+    }
 }

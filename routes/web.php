@@ -31,5 +31,6 @@ Route::group(
         Route::post('leads/{lead}/reminders', [ReminderController::class, 'store'])->name('leads.reminders.store');
         Route::get('leads/{lead}/reminders/{reminder}', [ReminderController::class, 'show'])->name('leads.reminders.show');
         Route::patch('leads/{lead}/reminders/{reminder}', [ReminderController::class, 'update'])->name('leads.reminders.update');
+        Route::post('leads/{lead}/reminders/{reminder}/mark-as-completed', [ReminderController::class, 'markAsCompleted'])->name('leads.reminders.mark_as_completed');
     }
 );

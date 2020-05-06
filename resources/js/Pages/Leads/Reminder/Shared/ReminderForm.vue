@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="handleSubmit">
+    <div>
         <div class="form-group">
             <label for="reminder">Reminder</label>
             <textarea name="reminder" id="reminder" class="form-control" cols="30" rows="5" v-model="formData.reminder"></textarea>
@@ -16,9 +16,12 @@
             </div>
         </div>
 
-        <button class="btn btn-success" type="submit">Save</button>
+        <button class="btn btn-success" type="submit" @click="handleSubmit">Save</button>
+        <template v-if="reminderDetail">
+            <button class="btn btn-outline-danger" @click="handleCloseReminder">Close Reminder</button>
+        </template>
         <slot></slot>
-    </form>
+    </div>
 </template>
 
 <script>
@@ -31,19 +34,25 @@
                 }
             }
         },
-        props:{
-            reminderDetail:{
-                type:Object
+        props: {
+            reminderDetail: {
+                type: Object
             }
         },
         created() {
-            if(this.reminderDetail){
+            if (this.reminderDetail) {
                 this.formData = this.reminderDetail
             }
         },
         methods: {
             handleSubmit() {
                 this.$emit('reminder-submitted', this.formData)
+            },
+            handleNewReminder() {
+                this.$emit('add-new-reminder', this.reminderDetail)
+            },
+            handleCloseReminder() {
+                this.$emit('close-reminder', this.reminderDetail)
             }
         }
     }
