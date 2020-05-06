@@ -110,7 +110,7 @@
                     <div class="card" v-else>
                         <div class="card-header">Lead Reminders</div>
                         <div class="card-body">
-                            <button class="btn btn-success">Add New Reminder</button>
+                            <inertia-link class="btn btn-success" :href="$route('leads.reminders.create', [leadDetail.id])">Add New Reminder</inertia-link>
                         </div>
                     </div>
                 </div>
@@ -147,9 +147,9 @@
         },
         methods: {
             async handleSubmit() {
-                this.lead['_method'] = 'patch';
+                // this.lead['_method'] = 'patch';
                 let targetRoute = this.$route('leads.update', this.leadDetail.id);
-                let response = await this.$inertia.post(targetRoute, this.lead)
+                let response = await this.$inertia.patch(targetRoute, this.lead)
             }
         }
     }

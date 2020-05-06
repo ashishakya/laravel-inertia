@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeadController;
+use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,5 +27,6 @@ Route::group(
     function () {
         Route::get('dashboard', [DashboardController::class, '__invoke'])->name('dashboard');
         Route::resource('leads', 'LeadController');
+        Route::get('leads/{lead}/reminders/create', [ReminderController::class, 'create'])->name('leads.reminders.create');
     }
 );
