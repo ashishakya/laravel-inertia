@@ -2109,6 +2109,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2164,10 +2179,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Shared/Layout */ "./resources/js/Shared/Layout.vue");
-//
-//
-//
-//
 //
 //
 //
@@ -2675,6 +2686,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2730,9 +2759,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
 //
 //
 //
@@ -39827,7 +39853,18 @@ var render = function() {
                       _vm.$set(_vm.lead, "name", $event.target.value)
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.$page.errors.name
+                  ? _c("div", [
+                      _c("span", {
+                        staticClass: "text-danger",
+                        domProps: {
+                          textContent: _vm._s(_vm.$page.errors.name[0])
+                        }
+                      })
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
@@ -39859,7 +39896,18 @@ var render = function() {
                         _vm.$set(_vm.lead, "phone", $event.target.value)
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.$page.errors.phone
+                    ? _c("div", [
+                        _c("span", {
+                          staticClass: "text-danger",
+                          domProps: {
+                            textContent: _vm._s(_vm.$page.errors.phone[0])
+                          }
+                        })
+                      ])
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group col-md-6" }, [
@@ -39896,7 +39944,20 @@ var render = function() {
                         )
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.$page.errors.interested_package
+                    ? _c("div", [
+                        _c("span", {
+                          staticClass: "text-danger",
+                          domProps: {
+                            textContent: _vm._s(
+                              _vm.$page.errors.interested_package[0]
+                            )
+                          }
+                        })
+                      ])
+                    : _vm._e()
                 ])
               ])
             ]),
@@ -39930,7 +39991,18 @@ var render = function() {
                       _vm.$set(_vm.lead, "email", $event.target.value)
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.$page.errors.email
+                  ? _c("div", [
+                      _c("span", {
+                        staticClass: "text-danger",
+                        domProps: {
+                          textContent: _vm._s(_vm.$page.errors.email[0])
+                        }
+                      })
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
@@ -39961,7 +40033,18 @@ var render = function() {
                       _vm.$set(_vm.lead, "dob", $event.target.value)
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _vm.$page.errors.dob
+                  ? _c("div", [
+                      _c("span", {
+                        staticClass: "text-danger",
+                        domProps: {
+                          textContent: _vm._s(_vm.$page.errors.dob[0])
+                        }
+                      })
+                    ])
+                  : _vm._e()
               ])
             ])
           ]),
@@ -40043,8 +40126,6 @@ var render = function() {
             { staticClass: "table table-bordered" },
             [
               _c("tr", [
-                _c("th", [_vm._v("Id")]),
-                _vm._v(" "),
                 _c("th", [_vm._v("Name")]),
                 _vm._v(" "),
                 _c("th", [_vm._v("Email")]),
@@ -40064,8 +40145,6 @@ var render = function() {
               _vm._v(" "),
               _vm._l(_vm.leads, function(lead) {
                 return _c("tr", { key: lead.id }, [
-                  _c("td", { domProps: { textContent: _vm._s(lead.id) } }),
-                  _vm._v(" "),
                   _c("td", { domProps: { textContent: _vm._s(lead.name) } }),
                   _vm._v(" "),
                   _c("td", { domProps: { textContent: _vm._s(lead.email) } }),
@@ -40634,7 +40713,18 @@ var render = function() {
                               _vm.$set(_vm.lead, "name", $event.target.value)
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.$page.errors.name
+                          ? _c("div", [
+                              _c("span", {
+                                staticClass: "text-danger",
+                                domProps: {
+                                  textContent: _vm._s(_vm.$page.errors.name[0])
+                                }
+                              })
+                            ])
+                          : _vm._e()
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "row" }, [
@@ -40668,7 +40758,20 @@ var render = function() {
                                 _vm.$set(_vm.lead, "phone", $event.target.value)
                               }
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _vm.$page.errors.phone
+                            ? _c("div", [
+                                _c("span", {
+                                  staticClass: "text-danger",
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      _vm.$page.errors.phone[0]
+                                    )
+                                  }
+                                })
+                              ])
+                            : _vm._e()
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "form-group col-md-6" }, [
@@ -40705,7 +40808,20 @@ var render = function() {
                                 )
                               }
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _vm.$page.errors.interested_package
+                            ? _c("div", [
+                                _c("span", {
+                                  staticClass: "text-danger",
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      _vm.$page.errors.interested_package[0]
+                                    )
+                                  }
+                                })
+                              ])
+                            : _vm._e()
                         ])
                       ])
                     ]),
@@ -40741,7 +40857,18 @@ var render = function() {
                               _vm.$set(_vm.lead, "email", $event.target.value)
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.$page.errors.email
+                          ? _c("div", [
+                              _c("span", {
+                                staticClass: "text-danger",
+                                domProps: {
+                                  textContent: _vm._s(_vm.$page.errors.email[0])
+                                }
+                              })
+                            ])
+                          : _vm._e()
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
@@ -40774,7 +40901,18 @@ var render = function() {
                               _vm.$set(_vm.lead, "dob", $event.target.value)
                             }
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _vm.$page.errors.dob
+                          ? _c("div", [
+                              _c("span", {
+                                staticClass: "text-danger",
+                                domProps: {
+                                  textContent: _vm._s(_vm.$page.errors.dob[0])
+                                }
+                              })
+                            ])
+                          : _vm._e()
                       ])
                     ])
                   ]),
@@ -40811,9 +40949,31 @@ var render = function() {
         _c("div", { staticClass: "col-md-12" }, [
           _vm.leadDetail.reminders.length > 0
             ? _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-header" }, [
-                  _vm._v("Lead Reminders")
-                ]),
+                _c(
+                  "div",
+                  {
+                    staticClass: "card-header",
+                    staticStyle: { display: "flex" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Lead Reminders\n                        "
+                    ),
+                    _c(
+                      "inertia-link",
+                      {
+                        staticClass: "btn btn-success ml-auto",
+                        attrs: {
+                          href: _vm.$route("leads.reminders.create", [
+                            _vm.lead.id
+                          ])
+                        }
+                      },
+                      [_vm._v("Add Reminder")]
+                    )
+                  ],
+                  1
+                ),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c(
@@ -40985,16 +41145,7 @@ var render = function() {
                             staticClass: "dropdown-item",
                             attrs: { href: "/leads" }
                           },
-                          [_vm._v("View Leads")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "inertia-link",
-                          {
-                            staticClass: "dropdown-item",
-                            attrs: { href: "/leads/create" }
-                          },
-                          [_vm._v("Add Lead")]
+                          [_vm._v("Leads")]
                         )
                       ],
                       1
@@ -41004,7 +41155,28 @@ var render = function() {
                 _vm._v(" "),
                 _c("ul", { staticClass: "navbar-nav ml-auto" }, [
                   _c("li", { staticClass: "nav-item dropdown" }, [
-                    _vm._m(2),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link dropdown-toggle",
+                        attrs: {
+                          id: "navbarDropdown",
+                          href: "#",
+                          role: "button",
+                          "data-toggle": "dropdown",
+                          "aria-haspopup": "true",
+                          "aria-expanded": "false"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(_vm.$page.auth.user.name) +
+                            " "
+                        ),
+                        _c("span", { staticClass: "caret" })
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -41076,31 +41248,7 @@ var staticRenderFns = [
         }
       },
       [
-        _vm._v("\n                                Manage "),
-        _c("span", { pre: true, attrs: { class: "caret" } })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        pre: true,
-        attrs: {
-          id: "navbarDropdown",
-          class: "nav-link dropdown-toggle",
-          href: "#",
-          role: "button",
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false"
-        }
-      },
-      [
-        _vm._v("\n                                Admin "),
+        _vm._v("\n                            Manage "),
         _c("span", { pre: true, attrs: { class: "caret" } })
       ]
     )

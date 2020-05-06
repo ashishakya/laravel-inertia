@@ -11,7 +11,6 @@
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <tr>
-                            <th>Id</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
@@ -22,7 +21,6 @@
                             <th>Action</th>
                         </tr>
                         <tr v-for="lead in leads" :key="lead.id">
-                            <td v-text="lead.id"></td>
                             <td v-text="lead.name"></td>
                             <td v-text="lead.email"></td>
                             <td v-text="lead.phone"></td>
@@ -31,8 +29,6 @@
                             <td v-text="lead.interested_package"></td>
                             <td v-text="lead.created_at"></td>
                             <td>
-                                <!--                                <inertia-link :href="$route('users.create')">Create User</inertia-link>-->
-
                                 <inertia-link :href="$route('leads.show', [lead.id])">View</inertia-link>
                             </td>
                         </tr>

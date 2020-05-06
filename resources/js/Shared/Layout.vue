@@ -19,9 +19,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-<!--                                <a class="dropdown-item" href="#" @click="handleLogout">Leads</a>-->
-                                <inertia-link href="/leads" class="dropdown-item">View Leads</inertia-link>
-                                <inertia-link href="/leads/create" class="dropdown-item">Add Lead</inertia-link>
+                                <inertia-link href="/leads" class="dropdown-item">Leads</inertia-link>
                             </div>
                         </li>
 
@@ -30,13 +28,12 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Admin <span class="caret"></span>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ $page.auth.user.name }} <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#" @click="handleLogout">Logout</a>
-<!--                                <inertia-link href="/logout" class="dropdown-item" method="post">Logout</inertia-link>-->
 
                             </div>
                         </li>
@@ -55,9 +52,9 @@
     export default {
         methods: {
             async handleLogout() {
-               await axios.post('/logout');
+                await axios.post('/logout');
 
-               window.location.href= '/';
+                window.location.href = '/';
             }
         }
     }

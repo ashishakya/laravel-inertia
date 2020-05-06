@@ -14,6 +14,9 @@
                                    v-model="lead.name"
                                    tabindex="1"
                             >
+                            <div v-if="$page.errors.name">
+                                <span v-text="$page.errors.name[0]" class="text-danger"></span>
+                            </div>
                         </div>
                         <!--                        phone-->
                         <div class="row">
@@ -26,6 +29,9 @@
                                        v-model="lead.phone"
                                        tabindex="3"
                                 >
+                                <div v-if="$page.errors.phone">
+                                    <span v-text="$page.errors.phone[0]" class="text-danger"></span>
+                                </div>
                             </div>
                             <!--                        interested pa-->
                             <div class="form-group col-md-6">
@@ -37,6 +43,9 @@
                                        v-model="lead.interested_package"
                                        tabindex="4"
                                 >
+                                <div v-if="$page.errors.interested_package">
+                                    <span v-text="$page.errors.interested_package[0]" class="text-danger"></span>
+                                </div>
                             </div>
                         </div>
 
@@ -54,6 +63,9 @@
                                    v-model="lead.email"
                                    tabindex="2"
                             >
+                            <div v-if="$page.errors.email">
+                                <span v-text="$page.errors.email[0]" class="text-danger"></span>
+                            </div>
                         </div>
                         <!--                        dob-->
                         <div class="form-group">
@@ -65,6 +77,9 @@
                                    v-model="lead.dob"
                                    tabindex="5"
                             >
+                            <div v-if="$page.errors.dob">
+                                <span v-text="$page.errors.dob[0]" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -15,7 +15,7 @@ class LeadController extends Controller
     {
         $leads = Lead::query()
                      ->where('branch_id', 1)
-                     ->latest()
+                     ->orderBy('name')
                      ->get();
 
         return Inertia::render(
