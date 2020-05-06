@@ -28,4 +28,21 @@ class ReminderController extends Controller
 
         return redirect()->route('leads.show', $leadId);
     }
+
+    public function show(Lead $lead, Reminder $reminder)
+    {
+        $data = [
+            'lead'     => $lead,
+            'reminder' => $reminder,
+        ];
+
+        return Inertia::render('Leads/Reminder/Show', $data);
+    }
+
+    public function update(CreateUpdateReminderRequest $request, Lead $lead, Reminder $reminder)
+    {
+        $reminder->update($request->validated());
+
+        return redirect()->route('leads.show', $lead->id);
+    }
 }

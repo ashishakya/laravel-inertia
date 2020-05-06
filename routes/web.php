@@ -29,5 +29,7 @@ Route::group(
         Route::resource('leads', 'LeadController');
         Route::get('leads/{lead}/reminders/create', [ReminderController::class, 'create'])->name('leads.reminders.create');
         Route::post('leads/{lead}/reminders', [ReminderController::class, 'store'])->name('leads.reminders.store');
+        Route::get('leads/{lead}/reminders/{reminder}', [ReminderController::class, 'show'])->name('leads.reminders.show');
+        Route::patch('leads/{lead}/reminders/{reminder}', [ReminderController::class, 'update'])->name('leads.reminders.update');
     }
 );

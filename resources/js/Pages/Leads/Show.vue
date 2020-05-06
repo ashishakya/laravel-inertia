@@ -108,7 +108,7 @@
                                         <div class="col-md-2">{{ reminder.reminder_date }}</div>
                                         <div class="col-md-2"><strong>{{ reminder.status }}</strong></div>
                                         <div class="col-md-2">
-                                            <inertia-link href="#">View</inertia-link>
+                                            <inertia-link :href="$route('leads.reminders.show', [leadDetail.id, reminder.id])">View</inertia-link>
                                         </div>
                                     </div>
                                 </li>
