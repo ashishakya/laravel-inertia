@@ -18,7 +18,7 @@
 
         <button class="btn btn-success" type="submit" @click="handleSubmit">Save</button>
         <template v-if="reminderDetail">
-            <button class="btn btn-outline-danger" @click="handleCloseReminder">Close Reminder</button>
+            <inertia-link class="btn btn-outline-danger" :href="$route('leads.reminders.add_note', [reminderDetail.lead_id, reminderDetail.id ])">Close Reminder</inertia-link>
         </template>
         <slot></slot>
     </div>
@@ -47,12 +47,6 @@
         methods: {
             handleSubmit() {
                 this.$emit('reminder-submitted', this.formData)
-            },
-            handleNewReminder() {
-                this.$emit('add-new-reminder', this.reminderDetail)
-            },
-            handleCloseReminder() {
-                this.$emit('close-reminder', this.reminderDetail)
             }
         }
     }

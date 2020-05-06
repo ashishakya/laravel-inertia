@@ -27,10 +27,20 @@ Route::group(
     function () {
         Route::get('dashboard', [DashboardController::class, '__invoke'])->name('dashboard');
         Route::resource('leads', 'LeadController');
-        Route::get('leads/{lead}/reminders/create', [ReminderController::class, 'create'])->name('leads.reminders.create');
-        Route::post('leads/{lead}/reminders', [ReminderController::class, 'store'])->name('leads.reminders.store');
-        Route::get('leads/{lead}/reminders/{reminder}', [ReminderController::class, 'show'])->name('leads.reminders.show');
-        Route::patch('leads/{lead}/reminders/{reminder}', [ReminderController::class, 'update'])->name('leads.reminders.update');
-        Route::post('leads/{lead}/reminders/{reminder}/mark-as-completed', [ReminderController::class, 'markAsCompleted'])->name('leads.reminders.mark_as_completed');
+        Route::group(
+            [
+                'prefix' => 'leads/{lead}/reminders',
+                'as'     => 'leads.reminders.',
+            ],
+            function () {
+                Route::get('create', [ReminderController::class, 'create'])->name('create');
+                Route::post('/', [ReminderController::class, 'store'])->name('store');
+                Route::get('{reminder}', [ReminderController::class, 'show'])->name('show');
+                Route::patch('{reminder}', [ReminderController::class, 'update'])->name('update');
+                Route::post('{reminder}/mark-as-completed', [ReminderController::class, 'markAsCompleted'])->name('mark_as_completed');
+                Route::post('{reminder}/close-reminder', [ReminderController::class, 'closeReminder'])->name('close_reminder');
+                Route::get('{reminder}/add-note', [ReminderController::class, 'addNote'])->name('add_note');
+            }
+        );
     }
 );
