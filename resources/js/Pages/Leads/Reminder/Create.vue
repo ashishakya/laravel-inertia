@@ -21,11 +21,17 @@
                                 <div class="form-group">
                                     <label for="reminder">Reminder</label>
                                     <textarea name="reminder" id="reminder" class="form-control" cols="30" rows="5" v-model="formData.reminder"></textarea>
+                                    <div class="error" v-if="$page.errors.reminder">
+                                        <span class="text-danger">{{ $page.errors.reminder[0] }}</span>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="date">Reminder Date</label>
                                     <input type='date' name="reminder_date" id="date" class="form-control" v-model="formData.reminder_date"/>
+                                    <div class="error" v-if="$page.errors.reminder_date">
+                                        <span class="text-danger">{{ $page.errors.reminder_date[0] }}</span>
+                                    </div>
                                 </div>
 
                                 <button class="btn btn-success" type="submit">Save</button>
@@ -44,7 +50,7 @@
     export default {
         data() {
             return {
-                formData:{
+                formData: {
                     reminder: '',
                     reminder_date: '',
                     lead_id: this.lead.id,
@@ -59,13 +65,13 @@
                 type: Object
             }
         },
-        methods:{
-            async handleSubmit(){
+        methods: {
+            async handleSubmit() {
                 let targetRoute = this.$route('leads.reminders.store', [this.lead.id]);
                 await this.$inertia.post(targetRoute, this.formData)
-                    .then(()=>{
+                    .then(() => {
                         console.log('done')
-                })
+                    })
             }
         }
     }
