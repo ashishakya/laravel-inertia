@@ -26,7 +26,7 @@ $factory->define(
         return [
             'user_id'               => 1,
             'reminder'=>$faker->realText(100),
-            'reminder_date'=>$faker->dateTime,
+            'reminder_date'=>Arr::random([$faker->dateTime, today()]),
             'status'=>Arr::random(['completed', 'pending']),
         ];
     }
