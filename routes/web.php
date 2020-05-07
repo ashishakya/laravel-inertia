@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeadController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
@@ -42,5 +43,6 @@ Route::group(
                 Route::get('{reminder}/add-note', [ReminderController::class, 'addNote'])->name('add_note');
             }
         );
+        Route::get('packages', [PackageController::class, 'index'])->name('packages.index');
     }
 );
