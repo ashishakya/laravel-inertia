@@ -26,7 +26,7 @@ class ReminderController extends Controller
         $data['status']  = 'pending';
         Reminder::create($data);
 
-        return redirect()->route('leads.show', $leadId);
+        return redirect()->route('leads.show', $leadId)->with('success', 'Reminder added successfully.');
     }
 
     public function show(Lead $lead, Reminder $reminder)
@@ -43,14 +43,14 @@ class ReminderController extends Controller
     {
         $reminder->update($request->validated());
 
-        return redirect()->route('leads.show', $lead->id);
+        return redirect()->route('leads.show', $lead->id)->with('success', 'Reminder updated successfully.');
     }
 
     public function markAsCompleted(Request $request, Lead $lead, Reminder $reminder)
     {
         $reminder->markAsCompleted();
 
-        return redirect()->route('leads.show', $lead->id);
+        return redirect()->route('leads.show', $lead->id)->with('success', 'Reminder marked as completed.');
     }
 
     public function closeReminder(Request $request, Lead $lead, Reminder $reminder)
@@ -67,7 +67,7 @@ class ReminderController extends Controller
 
         $reminder->markAsCompleted();
 
-        return redirect()->route('leads.show', $lead->id);
+        return redirect()->route('leads.show', $lead->id)->with('success', 'Reminder closed successfully.');
     }
 
     public function addNote(Lead $lead, Reminder $reminder)

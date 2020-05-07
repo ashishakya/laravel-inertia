@@ -59,7 +59,7 @@ class LeadController extends Controller
 
         Lead::create($data);
 
-        return redirect()->route('leads.index');
+        return redirect()->route('leads.index')->with('success', 'Lead added successfully.');
     }
 
     public function update(CreateUpdateLeadRequest $request, int $leadId)
@@ -69,6 +69,6 @@ class LeadController extends Controller
 
         $lead = Lead::where('id', $leadId)->update($data);
 
-        return redirect()->route('leads.show', $leadId);
+        return redirect()->route('leads.show', $leadId)->with('success', 'Lead updated successfully.');
     }
 }

@@ -22,6 +22,6 @@ class PackageController extends Controller
     {
         Package::create($request->validated());
 
-        return redirect()->route('packages.index');
+        return redirect()->route('packages.index')->with('success', 'Package added successfully.');
     }
 }

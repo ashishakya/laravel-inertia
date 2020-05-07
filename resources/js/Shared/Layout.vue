@@ -44,19 +44,42 @@
         </nav>
 
         <main class="py-4">
+            <FlashMessage @hide-flash-message="hideFlashMessage"
+                          v-if="shouldShowFlashMessage"/>
             <slot/>
         </main>
     </div>
 </template>
 
 <script>
+    import FlashMessage from "../Pages/Utilities/FlashMessage";
+
     export default {
+        data() {
+            return {
+                shouldShowFlashMessage: true
+            }
+        },
         methods: {
             async handleLogout() {
                 await axios.post('/logout');
 
                 window.location.href = '/';
+            },
+            hideFlashMessage() {
+                this.shouldShowFlashMessage = false;
             }
+        },
+        watch: {
+            '$page.flash': {
+                handler() {
+                    this.shouldShowFlashMessage = true
+                },
+                deep: true,
+            },
+        },
+        components: {
+            FlashMessage
         }
     }
 </script>
