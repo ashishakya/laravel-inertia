@@ -1961,10 +1961,66 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['reminders'],
+  props: ['reminders', 'packages', 'latestLeads'],
   components: {
     Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"],
     ReminderList: _Reminder_ReminderList__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -39826,7 +39882,188 @@ var render = function() {
           { staticClass: "col-sm-4" },
           [_c("ReminderList", { attrs: { reminders: _vm.reminders } })],
           1
-        )
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-8" }, [
+          _c("nav", [
+            _c(
+              "div",
+              {
+                staticClass: "nav nav-tabs",
+                attrs: { id: "nav-tab", role: "tablist" }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-item nav-link active",
+                    attrs: {
+                      id: "nav-package-tab",
+                      "data-toggle": "tab",
+                      href: "#nav-home",
+                      role: "tab",
+                      "aria-controls": "nav-home",
+                      "aria-selected": "true"
+                    }
+                  },
+                  [_vm._v("Packages")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "nav-item nav-link",
+                    attrs: {
+                      id: "nav-recent-leads-tab",
+                      "data-toggle": "tab",
+                      href: "#nav-profile",
+                      role: "tab",
+                      "aria-controls": "nav-profile",
+                      "aria-selected": "false"
+                    }
+                  },
+                  [_vm._v("Leads")]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "tab-content", attrs: { id: "nav-tabContent" } },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "tab-pane fade show active",
+                  attrs: {
+                    id: "nav-home",
+                    role: "tabpanel",
+                    "aria-labelledby": "nav-package-tab"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-header" }, [
+                      _vm._v("Available Packages")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-body" }, [
+                      _c(
+                        "ul",
+                        { staticClass: "list-group list-group-flush" },
+                        _vm._l(_vm.packages, function(packageItem) {
+                          return _c(
+                            "li",
+                            {
+                              key: packageItem.id,
+                              staticClass: "list-group-item",
+                              staticStyle: { display: "flex" }
+                            },
+                            [
+                              _c("inertia-link", {
+                                attrs: { href: "#" },
+                                domProps: {
+                                  textContent: _vm._s(packageItem.name)
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "ml-auto" }, [
+                                _vm._v(
+                                  "Rs. " + _vm._s(packageItem.amount) + "/-"
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        }),
+                        0
+                      )
+                    ])
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "tab-pane fade",
+                  attrs: {
+                    id: "nav-profile",
+                    role: "tabpanel",
+                    "aria-labelledby": "nav-recent-leads-tab"
+                  }
+                },
+                [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-header" }, [
+                      _vm._v("Recent Leads")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("table", { staticClass: "table table-striped" }, [
+                        _c("thead", [
+                          _c("tr", [
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Name")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Email")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Phone")
+                            ]),
+                            _vm._v(" "),
+                            _c("th", { attrs: { scope: "col" } }, [
+                              _vm._v("Registered On")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.latestLeads, function(lead) {
+                            return _c("tr", { key: lead.id }, [
+                              _c(
+                                "td",
+                                [
+                                  _c("inertia-link", {
+                                    attrs: {
+                                      href: _vm.$route("leads.show", [lead.id])
+                                    },
+                                    domProps: { textContent: _vm._s(lead.name) }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("td", {
+                                domProps: { textContent: _vm._s(lead.email) }
+                              }),
+                              _vm._v(" "),
+                              _c("td", {
+                                domProps: { textContent: _vm._s(lead.phone) }
+                              }),
+                              _vm._v(" "),
+                              _c("td", {
+                                domProps: {
+                                  textContent: _vm._s(lead.created_at)
+                                }
+                              })
+                            ])
+                          }),
+                          0
+                        )
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ]
+          )
+        ])
       ])
     ])
   ])
