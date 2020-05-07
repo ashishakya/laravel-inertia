@@ -2786,14 +2786,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      formData: {
+        name: '',
+        amount: '',
+        no_of_days: ''
+      }
+    };
+  },
   components: {
     Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
     packages: {
       type: Array
+    }
+  },
+  methods: {
+    handleSubmit: function handleSubmit() {
+      var _this = this;
+
+      var targetRoute = this.$route('packages.store');
+      this.$inertia.post(targetRoute, this.formData).then(function () {
+        return _this.resetForm();
+      });
+    },
+    resetForm: function resetForm() {
+      this.formData = {
+        name: '',
+        amount: '',
+        no_of_days: ''
+      };
     }
   }
 });
@@ -41206,8 +41256,157 @@ var render = function() {
             _c("div", { staticClass: "card-header" }, [_vm._v("Add Packages")]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                        here comes the list\n                    "
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.handleSubmit($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formData.name,
+                          expression: "formData.name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "name", name: "name" },
+                      domProps: { value: _vm.formData.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.formData, "name", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.$page.errors.name
+                      ? _c("div", [
+                          _c("span", {
+                            staticClass: "text-danger",
+                            domProps: {
+                              textContent: _vm._s(_vm.$page.errors.name[0])
+                            }
+                          })
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "amount" } }, [
+                      _vm._v("Amount")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formData.amount,
+                          expression: "formData.amount"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "amount", name: "amount", type: "number" },
+                      domProps: { value: _vm.formData.amount },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.formData, "amount", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.$page.errors.amount
+                      ? _c("div", [
+                          _c("span", {
+                            staticClass: "text-danger",
+                            domProps: {
+                              textContent: _vm._s(_vm.$page.errors.amount[0])
+                            }
+                          })
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "no_of_days" } }, [
+                      _vm._v("No of Days")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formData.no_of_days,
+                          expression: "formData.no_of_days"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "no_of_days",
+                        type: "number",
+                        name: "no_of_days"
+                      },
+                      domProps: { value: _vm.formData.no_of_days },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.formData,
+                            "no_of_days",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.$page.errors.no_of_days
+                      ? _c("div", [
+                          _c("span", {
+                            staticClass: "text-danger",
+                            domProps: {
+                              textContent: _vm._s(
+                                _vm.$page.errors.no_of_days[0]
+                              )
+                            }
+                          })
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Save")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    { staticClass: "btn btn-dark", attrs: { type: "reset" } },
+                    [_vm._v("Reset")]
+                  )
+                ]
               )
             ])
           ])

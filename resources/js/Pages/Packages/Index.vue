@@ -23,7 +23,31 @@
                     <div class="card">
                         <div class="card-header">Add Packages</div>
                         <div class="card-body">
-                            here comes the list
+                            <form @submit.prevent="handleSubmit">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" name="name" class="form-control" v-model="formData.name">
+                                    <div v-if="$page.errors.name">
+                                        <span class="text-danger" v-text="$page.errors.name[0]"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="amount">Amount</label>
+                                    <input id="amount" name="amount" class="form-control" type="number" v-model="formData.amount">
+                                    <div v-if="$page.errors.amount">
+                                        <span class="text-danger" v-text="$page.errors.amount[0]"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="no_of_days">No of Days</label>
+                                    <input id="no_of_days" type='number' name="no_of_days" class="form-control" v-model="formData.no_of_days">
+                                    <div v-if="$page.errors.no_of_days">
+                                        <span class="text-danger" v-text="$page.errors.no_of_days[0]"></span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success" type="submit">Save</button>
+                                <button class="btn btn-dark" type="reset">Reset</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -36,11 +60,34 @@
     import Layout from "../../Shared/Layout";
 
     export default {
+        data() {
+            return {
+                formData: {
+                    name: '',
+                    amount: '',
+                    no_of_days: ''
+                }
+            }
+        },
         components: {
             Layout
         },
         props: {
             packages: {type: Array}
+        },
+        methods: {
+            handleSubmit() {
+                let targetRoute = this.$route('packages.store');
+                this.$inertia.post(targetRoute, this.formData)
+                    .then(() => this.resetForm())
+            },
+            resetForm() {
+                this.formData = {
+                    name: '',
+                    amount: '',
+                    no_of_days: ''
+                }
+            }
         }
     }
 </script>

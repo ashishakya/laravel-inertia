@@ -43,6 +43,6 @@ Route::group(
                 Route::get('{reminder}/add-note', [ReminderController::class, 'addNote'])->name('add_note');
             }
         );
-        Route::get('packages', [PackageController::class, 'index'])->name('packages.index');
+        Route::resource('packages', 'PackageController');
     }
 );
