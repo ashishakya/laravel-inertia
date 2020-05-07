@@ -33,16 +33,17 @@
                                     <span v-text="$page.errors.phone[0]" class="text-danger"></span>
                                 </div>
                             </div>
-                            <!--                        interested pa-->
                             <div class="form-group col-md-6">
                                 <label for="phone">Interested Package</label>
-                                <input type="string"
+                                <select
                                        class="form-control"
-                                       placeholder="Enter package"
                                        id="package"
                                        v-model="lead.interested_package"
                                        tabindex="4"
                                 >
+                                    <option value="">Select a package</option>
+                                    <option v-for="packageItem in packages" v-text="packageItem.name"></option>
+                                </select>
                                 <div v-if="$page.errors.interested_package">
                                     <span v-text="$page.errors.interested_package[0]" class="text-danger"></span>
                                 </div>
@@ -109,6 +110,7 @@
                 }
             }
         },
+        props: ['packages'],
         components: {
             Layout
         },

@@ -2124,6 +2124,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2137,6 +2138,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     };
   },
+  props: ['packages'],
   components: {
     Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -40024,36 +40026,52 @@ var render = function() {
                     _vm._v("Interested Package")
                   ]),
                   _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.lead.interested_package,
-                        expression: "lead.interested_package"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "string",
-                      placeholder: "Enter package",
-                      id: "package",
-                      tabindex: "4"
-                    },
-                    domProps: { value: _vm.lead.interested_package },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.lead.interested_package,
+                          expression: "lead.interested_package"
                         }
-                        _vm.$set(
-                          _vm.lead,
-                          "interested_package",
-                          $event.target.value
-                        )
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "package", tabindex: "4" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.lead,
+                            "interested_package",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
                       }
-                    }
-                  }),
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("Select a package")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.packages, function(packageItem) {
+                        return _c("option", {
+                          domProps: { textContent: _vm._s(packageItem.name) }
+                        })
+                      })
+                    ],
+                    2
+                  ),
                   _vm._v(" "),
                   _vm.$page.errors.interested_package
                     ? _c("div", [
@@ -54494,7 +54512,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************************************************!*\
   !*** ./resources/js/Pages/Packages/Index.vue?vue&type=template&id=ac9e4a0e&scoped=true& ***!
   \******************************************************************************************/
-/*! no static exports found */
+/*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
