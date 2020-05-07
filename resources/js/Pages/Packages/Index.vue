@@ -58,6 +58,7 @@
 
 <script>
     import Layout from "../../Shared/Layout";
+    import {form} from "../../Helpers/Form";
 
     export default {
         data() {
@@ -78,8 +79,9 @@
         methods: {
             handleSubmit() {
                 let targetRoute = this.$route('packages.store');
-                this.$inertia.post(targetRoute, this.formData)
+                form.post(targetRoute, this.formData)
                     .then(() => this.resetForm())
+                    .catch(() => console.error('Error while storing package.'))
             },
             resetForm() {
                 this.formData = {
