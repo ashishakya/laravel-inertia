@@ -2869,6 +2869,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2878,7 +2879,8 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         amount: '',
         no_of_days: ''
-      }
+      },
+      form: new _Helpers_Form__WEBPACK_IMPORTED_MODULE_1__["default"]()
     };
   },
   components: {
@@ -2894,10 +2896,10 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var targetRoute = this.$route('packages.store');
-      _Helpers_Form__WEBPACK_IMPORTED_MODULE_1__["form"].post(targetRoute, this.formData).then(function () {
+      this.form.post(targetRoute, this.formData).then(function () {
         return _this.resetForm();
       })["catch"](function () {
-        return console.error('Error while storing package.');
+        console.error('Error while storing package.');
       });
     },
     resetForm: function resetForm() {
@@ -41601,6 +41603,9 @@ var render = function() {
                     submit: function($event) {
                       $event.preventDefault()
                       return _vm.handleSubmit($event)
+                    },
+                    keydown: function($event) {
+                      return _vm.form.errors.clear($event.target.name)
                     }
                   }
                 },
@@ -41630,12 +41635,12 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm.$page.errors.name
+                    _vm.form.errors.has("name")
                       ? _c("div", [
                           _c("span", {
                             staticClass: "text-danger",
                             domProps: {
-                              textContent: _vm._s(_vm.$page.errors.name[0])
+                              textContent: _vm._s(_vm.form.errors.get("name"))
                             }
                           })
                         ])
@@ -41669,12 +41674,12 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm.$page.errors.amount
+                    _vm.form.errors.has("amount")
                       ? _c("div", [
                           _c("span", {
                             staticClass: "text-danger",
                             domProps: {
-                              textContent: _vm._s(_vm.$page.errors.amount[0])
+                              textContent: _vm._s(_vm.form.errors.get("amount"))
                             }
                           })
                         ])
@@ -41716,13 +41721,13 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm.$page.errors.no_of_days
+                    _vm.form.errors.has("no_of_days")
                       ? _c("div", [
                           _c("span", {
                             staticClass: "text-danger",
                             domProps: {
                               textContent: _vm._s(
-                                _vm.$page.errors.no_of_days[0]
+                                _vm.form.errors.get("no_of_days")
                               )
                             }
                           })
@@ -54175,155 +54180,314 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/Helpers/Form.js":
-/*!**************************************!*\
-  !*** ./resources/js/Helpers/Form.js ***!
-  \**************************************/
-/*! exports provided: form */
+/***/ "./resources/js/Helpers/Errors.js":
+/*!****************************************!*\
+  !*** ./resources/js/Helpers/Errors.js ***!
+  \****************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "form", function() { return inertiaRequestWrapper; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Errors = /*#__PURE__*/function () {
+  function Errors() {
+    _classCallCheck(this, Errors);
+
+    this.errors = {};
+  }
+
+  _createClass(Errors, [{
+    key: "record",
+    value: function record(errors) {
+      this.errors = errors;
+    }
+  }, {
+    key: "all",
+    value: function all() {
+      return this.errors;
+    }
+    /**
+     * Determine if we have any errors.
+     */
+
+  }, {
+    key: "any",
+    value: function any() {
+      return Object.keys(this.errors).length > 0;
+    }
+    /**
+     * Retrieve the error message for a field.
+     *
+     * @param {string} field
+     */
+
+  }, {
+    key: "get",
+    value: function get(field) {
+      if (this.errors[field]) {
+        return Array.isArray(this.errors[field]) ? this.errors[field][0] + 'hehe' : this.errors[field];
+      }
+    }
+    /**
+     * Clear one or all error fields.
+     *
+     * @param {string|null} field
+     */
+
+  }, {
+    key: "clear",
+    value: function clear(field) {
+      if (field) {
+        delete this.errors[field];
+      }
+    }
+  }, {
+    key: "clearAllErrors",
+    value: function clearAllErrors() {
+      this.errors = {};
+    }
+    /**
+     * Determine if an errors exists for the given field.
+     *
+     * @param {string} field
+     */
+
+  }, {
+    key: "has",
+    value: function has(field) {
+      return this.errors.hasOwnProperty(field);
+    }
+  }]);
+
+  return Errors;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Errors);
+
+/***/ }),
+
+/***/ "./resources/js/Helpers/Form.js":
+/*!**************************************!*\
+  !*** ./resources/js/Helpers/Form.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Errors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Errors */ "./resources/js/Helpers/Errors.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
-var inertiaPromiseResponse = function inertiaPromiseResponse() {
-  var props = _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].page.props;
-  var errors = props.errors;
-  return Object.keys(errors).length === 0 ? Promise.resolve() : Promise.reject();
-};
 
-var inertiaRequestWrapper = {
-  get: function get(url) {
-    var _arguments = arguments;
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var options;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              options = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : {};
-              _context.next = 3;
-              return _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].visit(url, options);
 
-            case 3:
-              return _context.abrupt("return", inertiaPromiseResponse());
+var Form = /*#__PURE__*/function () {
+  function Form() {
+    _classCallCheck(this, Form);
 
-            case 4:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
-  },
-  post: function post(url) {
-    var _arguments2 = arguments;
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-      var data, options;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              data = _arguments2.length > 1 && _arguments2[1] !== undefined ? _arguments2[1] : {};
-              options = _arguments2.length > 2 && _arguments2[2] !== undefined ? _arguments2[2] : {};
-              _context2.next = 4;
-              return _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].post(url, data, options);
-
-            case 4:
-              return _context2.abrupt("return", inertiaPromiseResponse());
-
-            case 5:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }))();
-  },
-  put: function put(url) {
-    var _arguments3 = arguments;
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-      var data, options;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              data = _arguments3.length > 1 && _arguments3[1] !== undefined ? _arguments3[1] : {};
-              options = _arguments3.length > 2 && _arguments3[2] !== undefined ? _arguments3[2] : {};
-              _context3.next = 4;
-              return _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].put(url, data, options);
-
-            case 4:
-              return _context3.abrupt("return", inertiaPromiseResponse());
-
-            case 5:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3);
-    }))();
-  },
-  patch: function patch(url) {
-    var _arguments4 = arguments;
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-      var data, options;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              data = _arguments4.length > 1 && _arguments4[1] !== undefined ? _arguments4[1] : {};
-              options = _arguments4.length > 2 && _arguments4[2] !== undefined ? _arguments4[2] : {};
-              _context4.next = 4;
-              return _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].patch(url, data, options);
-
-            case 4:
-              return _context4.abrupt("return", inertiaPromiseResponse());
-
-            case 5:
-            case "end":
-              return _context4.stop();
-          }
-        }
-      }, _callee4);
-    }))();
-  },
-  "delete": function _delete(url) {
-    var _arguments5 = arguments;
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
-      var options;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
-        while (1) {
-          switch (_context5.prev = _context5.next) {
-            case 0:
-              options = _arguments5.length > 1 && _arguments5[1] !== undefined ? _arguments5[1] : {};
-              _context5.next = 3;
-              return _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"]["delete"](url, options);
-
-            case 3:
-              return _context5.abrupt("return", inertiaPromiseResponse());
-
-            case 4:
-            case "end":
-              return _context5.stop();
-          }
-        }
-      }, _callee5);
-    }))();
+    this.errors = new _Errors__WEBPACK_IMPORTED_MODULE_2__["default"]();
   }
-};
 
+  _createClass(Form, [{
+    key: "get",
+    value: function () {
+      var _get = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(url) {
+        var options,
+            _args = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                options = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
+                _context.next = 3;
+                return _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].visit(url, options);
+
+              case 3:
+                return _context.abrupt("return", this.inertiaPromiseResponse());
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function get(_x) {
+        return _get.apply(this, arguments);
+      }
+
+      return get;
+    }()
+  }, {
+    key: "post",
+    value: function () {
+      var _post = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(url) {
+        var data,
+            options,
+            _args2 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                data = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] : {};
+                options = _args2.length > 2 && _args2[2] !== undefined ? _args2[2] : {};
+                _context2.next = 4;
+                return _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].post(url, data, options);
+
+              case 4:
+                return _context2.abrupt("return", this.inertiaPromiseResponse());
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function post(_x2) {
+        return _post.apply(this, arguments);
+      }
+
+      return post;
+    }()
+  }, {
+    key: "put",
+    value: function () {
+      var _put = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(url) {
+        var data,
+            options,
+            _args3 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                data = _args3.length > 1 && _args3[1] !== undefined ? _args3[1] : {};
+                options = _args3.length > 2 && _args3[2] !== undefined ? _args3[2] : {};
+                _context3.next = 4;
+                return _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].put(url, data, options);
+
+              case 4:
+                return _context3.abrupt("return", this.inertiaPromiseResponse());
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function put(_x3) {
+        return _put.apply(this, arguments);
+      }
+
+      return put;
+    }()
+  }, {
+    key: "patch",
+    value: function () {
+      var _patch = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(url) {
+        var data,
+            options,
+            _args4 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                data = _args4.length > 1 && _args4[1] !== undefined ? _args4[1] : {};
+                options = _args4.length > 2 && _args4[2] !== undefined ? _args4[2] : {};
+                _context4.next = 4;
+                return _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].patch(url, data, options);
+
+              case 4:
+                return _context4.abrupt("return", this.inertiaPromiseResponse());
+
+              case 5:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function patch(_x4) {
+        return _patch.apply(this, arguments);
+      }
+
+      return patch;
+    }()
+  }, {
+    key: "delete",
+    value: function () {
+      var _delete2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(url) {
+        var options,
+            _args5 = arguments;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                options = _args5.length > 1 && _args5[1] !== undefined ? _args5[1] : {};
+                _context5.next = 3;
+                return _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"]["delete"](url, options);
+
+              case 3:
+                return _context5.abrupt("return", this.inertiaPromiseResponse());
+
+              case 4:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function _delete(_x5) {
+        return _delete2.apply(this, arguments);
+      }
+
+      return _delete;
+    }()
+  }, {
+    key: "inertiaPromiseResponse",
+    value: function inertiaPromiseResponse() {
+      var props = _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__["Inertia"].page.props;
+      var errs = props.errors;
+      this.errors.record(errs);
+
+      if (Object.keys(errors).length === 0) {
+        return Promise.resolve();
+      } else {
+        return Promise.reject();
+      }
+    }
+  }]);
+
+  return Form;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Form);
 
 /***/ }),
 
