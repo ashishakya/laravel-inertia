@@ -83,9 +83,7 @@
                 let targetRoute = this.$route('packages.store');
                 this.form.post(targetRoute, this.formData)
                     .then(() => this.resetForm())
-                    .catch(() => {
-                        console.error('Error while storing package.')
-                    })
+                    .catch(() => console.error('Error while storing package.'))
             },
             resetForm() {
                 this.formData = {

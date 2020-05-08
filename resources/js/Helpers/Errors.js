@@ -25,7 +25,7 @@ class Errors {
      */
     get(field) {
         if (this.errors[field]) {
-            return Array.isArray(this.errors[field]) ? this.errors[field][0] + 'hehe' : this.errors[field]
+            return Array.isArray(this.errors[field]) ? this.errors[field][0] : this.errors[field]
         }
     }
 

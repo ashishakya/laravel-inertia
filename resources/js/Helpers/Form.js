@@ -39,11 +39,11 @@ class Form {
     inertiaPromiseResponse() {
         const {props} = Inertia.page;
         let errs = props.errors
-        this.errors.record(errs);
 
-        if (Object.keys(errors).length === 0) {
+        if (Object.keys(errs).length === 0) {
             return Promise.resolve()
         } else {
+            this.errors.record(errs);
             return Promise.reject()
         }
     };

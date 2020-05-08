@@ -21,6 +21,7 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <inertia-link :href="$route('leads.index')" class="dropdown-item">Leads</inertia-link>
                                 <inertia-link :href="$route('packages.index')" class="dropdown-item">Packages</inertia-link>
+                                <inertia-link :href="$route('branches.index')" class="dropdown-item">Branches</inertia-link>
                             </div>
                         </li>
 

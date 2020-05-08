@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\PackageController;
@@ -31,5 +32,6 @@ Route::group(
             }
         );
         Route::resource('packages', PackageController::class);
+        Route::resource('branches', BranchController::class);
     }
 );
