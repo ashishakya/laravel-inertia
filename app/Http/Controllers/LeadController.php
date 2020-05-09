@@ -7,6 +7,8 @@ use App\Lead;
 use App\Package;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\UrlWindow;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -17,13 +19,14 @@ class LeadController extends Controller
         $leads = Lead::query()
                      ->where('branch_id', 1)
                      ->orderBy('name')
-                     ->get();
+                     ->paginate(5);
+
+        $paginatedLinks = $this->paginationLinks($leads);
+
 
         return Inertia::render(
             'Leads/Index',
-            [
-                'leads' => $leads,
-            ]
+            compact(['leads', 'paginatedLinks'])
         );
     }
 
@@ -70,5 +73,54 @@ class LeadController extends Controller
         $lead = Lead::where('id', $leadId)->update($data);
 
         return redirect()->route('leads.show', $leadId)->with('success', 'Lead updated successfully.');
+    }
+
+
+    function paginationLinks($lengthAwarePaginator)
+    {
+
+        $window = UrlWindow::make($lengthAwarePaginator);
+
+        $isCurrentPageSet = false;
+
+
+        // dd($lengthAwarePaginator->toArray());
+
+        $array = array_filter(
+            [
+                $window['first'],
+                is_array($window['slider']) ? '...' : null,
+                $window['slider'],
+                is_array($window['last']) ? '...' : null,
+                $window['last'],
+            ]
+        );
+        $i     = 1;
+        foreach ( $array as $index => $urlsArray ):
+
+            if ( is_array($urlsArray) ):
+                foreach ( $urlsArray as $pageNumber => $link ):
+                    $currentPage = $lengthAwarePaginator->currentPage();
+                    $n[]         = [
+                        'pageNumber'    => $pageNumber,
+                        'url'           => $link,
+                        'indexKey'      => $i,
+                        'type'          => 'URLS',
+                        'isCurrentPage' => $currentPage === $pageNumber,
+                    ];
+                    $i++;
+                endforeach;
+            elseif ( is_string($urlsArray) ):
+                $n[] = [
+                    'url'      => $urlsArray,
+                    'indexKey' => $i,
+                    'type'     => 'ELIPSIS',
+                ];
+                $i++;
+            endif;
+
+        endforeach;
+
+        return $n;
     }
 }

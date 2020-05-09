@@ -20,7 +20,7 @@
                             <th>Added On</th>
                             <th>Action</th>
                         </tr>
-                        <tr v-for="lead in leads" :key="lead.id">
+                        <tr v-for="lead in leads.data" :key="lead.id">
                             <td v-text="lead.name"></td>
                             <td v-text="lead.email"></td>
                             <td v-text="lead.phone"></td>
@@ -33,6 +33,12 @@
                             </td>
                         </tr>
                     </table>
+                    <links
+                        :urlsArray="paginatedLinks"
+                        :previousPageUrl="leads.prev_page_url"
+                        :nextPageUrl="leads.next_page_url"
+                    >
+                    </links>
                 </div>
             </div>
         </div>
@@ -41,12 +47,14 @@
 
 <script>
     import Layout from "../../Shared/Layout";
+    import Links from "../Utilities/Links";
 
     export default {
         components: {
-            Layout
+            Layout,
+            Links
         },
-        props: ['leads']
+        props: ['leads', 'paginatedLinks']
     }
 </script>
 
