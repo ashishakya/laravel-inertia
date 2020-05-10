@@ -2449,14 +2449,78 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      queryParams: {
+        search: '',
+        limit: 5,
+        page: ''
+      },
+      queryExcept: {
+        limit: this.limit || 5,
+        page: 1
+      }
+    };
+  },
+  created: function created() {
+    this.queryParams.search = this.initialSearch;
+  },
   components: {
     Layout: _Shared_Layout__WEBPACK_IMPORTED_MODULE_0__["default"],
     Links: _Utilities_Links__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ['leads', 'paginatedLinks']
+  props: ['leads', 'paginatedLinks', 'initialSearch'],
+  watch: {
+    queryParams: {
+      handler: function handler() {
+        var filteredQueryParams = this.filterQuery(this.queryParams);
+        var currentUrl = this.$route('leads.index');
+        this.$inertia.replace(currentUrl, {
+          data: filteredQueryParams
+        });
+      },
+      deep: true
+    }
+  },
+  methods: {
+    filterQuery: function filterQuery(currentQuery) {
+      var queryParams = Object.assign({}, currentQuery);
+
+      for (var propName in queryParams) {
+        if (queryParams[propName] === '' || queryParams[propName] === null || queryParams[propName] === undefined) {
+          delete queryParams[propName];
+        }
+      }
+
+      var exceptQuery = this.queryExcept;
+
+      for (var key in exceptQuery) {
+        if (queryParams[key] == exceptQuery[key]) {
+          delete queryParams[key];
+        }
+      }
+
+      return queryParams;
+    }
+  }
 });
 
 /***/ }),
@@ -3200,12 +3264,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['urlsArray', 'previousPageUrl', 'nextPageUrl'],
   methods: {
     isActive: function isActive(currentPageNo) {
       var params = new URLSearchParams(window.location.search);
       if (parseInt(params.get('page')) === currentPageNo) return 'active';
+    },
+    fetchNextPageData: function fetchNextPageData() {
+      var nextPageUrl = new URL(this.nextPageUrl);
+      var queryParams = new URLSearchParams(nextPageUrl.search);
+      var nextPageNo = queryParams.get('page');
+      this.$emit('input', nextPageNo);
+    },
+    fetchPreviousPageData: function fetchPreviousPageData() {
+      var previousPageUrl = new URL(this.previousPageUrl);
+      var queryParams = new URLSearchParams(previousPageUrl.search);
+      var previousPageNo = queryParams.get('page');
+      this.$emit('input', previousPageNo);
+    },
+    fetchDataForPage: function fetchDataForPage(pageNo) {
+      this.$emit('input', pageNo);
     }
   }
 });
@@ -41218,6 +41300,77 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
+      _c("div", { staticClass: "row", staticStyle: { display: "flex" } }, [
+        _c("div", { staticClass: "form-group col-md-2" }, [
+          _c("span", [_vm._v("Show")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.queryParams.limit,
+                  expression: "queryParams.limit"
+                }
+              ],
+              attrs: { name: "show", id: "show" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.queryParams,
+                    "limit",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", [_vm._v("5")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("10")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("20")])
+            ]
+          ),
+          _vm._v(" "),
+          _c("span", [_vm._v(" records")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-3 ml-auto" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.queryParams.search,
+                expression: "queryParams.search"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "search", id: "search", placeholder: "Search" },
+            domProps: { value: _vm.queryParams.search },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.queryParams, "search", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
@@ -41289,6 +41442,13 @@ var render = function() {
                 urlsArray: _vm.paginatedLinks,
                 previousPageUrl: _vm.leads.prev_page_url,
                 nextPageUrl: _vm.leads.next_page_url
+              },
+              model: {
+                value: _vm.queryParams.page,
+                callback: function($$v) {
+                  _vm.$set(_vm.queryParams, "page", $$v)
+                },
+                expression: "queryParams.page"
               }
             })
           ],
@@ -42507,21 +42667,22 @@ var render = function() {
       { staticClass: "pagination justify-content-center" },
       [
         _vm.previousPageUrl
-          ? _c(
-              "li",
-              { staticClass: "page-item" },
-              [
-                _c(
-                  "InertiaLink",
-                  {
-                    staticClass: "page-link",
-                    attrs: { href: _vm.previousPageUrl }
-                  },
-                  [_vm._v("\n                Prev\n            ")]
-                )
-              ],
-              1
-            )
+          ? _c("li", { staticClass: "page-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.fetchPreviousPageData($event)
+                    }
+                  }
+                },
+                [_vm._v("\n                Prev\n            ")]
+              )
+            ])
           : _vm._e(),
         _vm._v(" "),
         _vm._l(_vm.urlsArray, function(eachUrlArray) {
@@ -42545,7 +42706,13 @@ var render = function() {
                             "bg-blue-500 text-blue-700":
                               eachUrlArray.isCurrentPage === true
                           },
-                          attrs: { href: eachUrlArray.url }
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.fetchDataForPage(eachUrlArray.indexKey)
+                            }
+                          }
                         },
                         [
                           _vm._v(
@@ -42576,7 +42743,13 @@ var render = function() {
                   "InertiaLink",
                   {
                     staticClass: "page-link",
-                    attrs: { href: _vm.nextPageUrl }
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.fetchNextPageData($event)
+                      }
+                    }
                   },
                   [_vm._v("\n                Next\n            ")]
                 )

@@ -5,12 +5,13 @@
                 class="page-item"
                 v-if="previousPageUrl"
             >
-                <InertiaLink
-                    :href="previousPageUrl"
+                <a
+                    href="#"
+                    @click.prevent="fetchPreviousPageData"
                     class="page-link"
                 >
                     Prev
-                </InertiaLink>
+                </a>
             </li>
             <li
                 class="page-item"
@@ -20,7 +21,8 @@
             >
          <span v-if="eachUrlArray.type === 'URLS'">
             <InertiaLink
-                :href="eachUrlArray.url"
+                href="#"
+                @click.prevent="fetchDataForPage(eachUrlArray.indexKey)"
                 class="page-link"
                 :class="{ 'bg-blue-500 text-blue-700': eachUrlArray.isCurrentPage === true }"
             >
@@ -36,7 +38,8 @@
                 v-if="nextPageUrl"
             >
                 <InertiaLink
-                    :href="nextPageUrl"
+                    href="#"
+                    @click.prevent="fetchNextPageData"
                     class="page-link"
                 >
                     Next
@@ -54,6 +57,21 @@
                 const params = new URLSearchParams(window.location.search);
                 if (parseInt(params.get('page')) === currentPageNo)
                     return 'active';
+            },
+            fetchNextPageData() {
+                let nextPageUrl = new URL(this.nextPageUrl)
+                let queryParams = new URLSearchParams(nextPageUrl.search);
+                let nextPageNo = queryParams.get('page');
+                this.$emit('input', nextPageNo)
+            },
+            fetchPreviousPageData() {
+                let previousPageUrl = new URL(this.previousPageUrl)
+                let queryParams = new URLSearchParams(previousPageUrl.search);
+                let previousPageNo = queryParams.get('page');
+                this.$emit('input', previousPageNo)
+            },
+            fetchDataForPage(pageNo){
+                this.$emit('input', pageNo)
             }
         }
     }
