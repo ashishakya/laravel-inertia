@@ -7,6 +7,20 @@
                     <inertia-link :href="$route('leads.create')" class="btn btn-primary">Add Lead</inertia-link>
                 </div>
             </div>
+            <div class="row" style="display: flex">
+                <div class="form-group col-md-2">
+                    <span>Show</span>
+                    <select name="show" id="show" v-model="queryParams.limit">
+                        <option>5</option>
+                        <option>10</option>
+                        <option>20</option>
+                    </select>
+                    <span> records</span>
+                </div>
+                <div class="form-group col-md-3 ml-auto">
+                    <input type="search" id="search" class="form-control" placeholder="Search" v-model="queryParams.search">
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered">
@@ -37,6 +51,7 @@
                         :urlsArray="paginatedLinks"
                         :previousPageUrl="leads.prev_page_url"
                         :nextPageUrl="leads.next_page_url"
+                        v-model="queryParams.page"
                     >
                     </links>
                 </div>
@@ -50,11 +65,56 @@
     import Links from "../Utilities/Links";
 
     export default {
+        data() {
+            return {
+                queryParams: {
+                    search: '',
+                    limit: 5,
+                    page: ''
+                },
+                queryExcept: {
+                    limit: this.limit || 5,
+                    page: 1,
+                }
+            }
+        },
+        created() {
+            this.queryParams.search = this.initialSearch
+        },
         components: {
             Layout,
             Links
         },
-        props: ['leads', 'paginatedLinks']
+        props: ['leads', 'paginatedLinks', 'initialSearch'],
+        watch: {
+            queryParams: {
+                handler() {
+                    let filteredQueryParams = this.filterQuery(this.queryParams)
+                    let currentUrl = this.$route('leads.index');
+                    this.$inertia.replace(currentUrl, {
+                        data: filteredQueryParams
+                    })
+                }, deep: true
+            }
+        },
+        methods: {
+            filterQuery(currentQuery) {
+                let queryParams = Object.assign({}, currentQuery);
+                for (let propName in queryParams) {
+                    if (queryParams[propName] === '' || queryParams[propName] === null || queryParams[propName] === undefined) {
+                        delete queryParams[propName];
+                    }
+                }
+                
+                let exceptQuery = this.queryExcept;
+                for(let key in exceptQuery) {
+                    if (queryParams[key] == exceptQuery[key]) {
+                        delete queryParams[key]
+                    }
+                }
+                return queryParams;
+            },
+        }
     }
 </script>
 

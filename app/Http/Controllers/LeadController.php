@@ -16,17 +16,25 @@ class LeadController extends Controller
 {
     public function index()
     {
-        $leads = Lead::query()
-                     ->where('branch_id', 1)
-                     ->orderBy('name')
-                     ->paginate(5);
-
+        $searchParams   = \request()->get('search');
+        $limit        = \request()->get('limit', 5);
+        $leads          = Lead::query()
+                              ->where('branch_id', 1)
+                              ->where(
+                                  function ($query) use ($searchParams) {
+                                      $query->where('name', 'ilike', '%'.$searchParams.'%')
+                                            ->orWhere('email', 'ilike', '%'.$searchParams.'%');
+                                  }
+                              )
+                              ->orderBy('name')
+                              ->paginate($limit);
         $paginatedLinks = $this->paginationLinks($leads);
+        $initialSearch  = $searchParams ?? '';
 
 
         return Inertia::render(
             'Leads/Index',
-            compact(['leads', 'paginatedLinks'])
+            compact(['leads', 'paginatedLinks', 'initialSearch'])
         );
     }
 
